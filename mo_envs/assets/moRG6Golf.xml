@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="moRG6Golf">
+    <compiler angle="degree" meshdir="../stl/"  texturedir="../textures/" />
+    <option timestep="0.002" impratio="1"/>
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.44 0.85 0.56" rgb2="0.46 0.87 0.58" width="32" height="32"></texture>
+        <texture name="texture_block" file="block.png" gridsize="3 4" gridlayout=".U..LFRB.D.."></texture>
+        <mesh name="A0509_0_0" file="A0509_0_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_0" file="A0509_1_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_1" file="A0509_1_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_2" file="A0509_1_2.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_0" file="A0509_2_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_1" file="A0509_2_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_2" file="A0509_2_2.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_3_0" file="A0509_3_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_3_1" file="A0509_3_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_4_0" file="A0509_4_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_4_1" file="A0509_4_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_5_0" file="A0509_5_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_5_1" file="A0509_5_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_6_0" file="A0509_6_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="base_link" file="base_link.stl" />
+        <mesh name="outer_knuckle" file="outer_knuckle.stl" />
+        <mesh name="inner_knuckle" file="inner_knuckle.stl" />
+        <mesh name="inner_finger" file="inner_finger.stl" />
+        <mesh name="base_link_1" file="base_link_1.stl" />
+        <mesh name="outer_knuckle_1" file="outer_knuckle_1.stl" />
+        <mesh name="inner_knuckle_1" file="inner_knuckle_1.stl" />
+        <mesh name="inner_finger_1" file="inner_finger_1.stl" />
+        <material name="block_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.2 0.2 0.2 1"></material>
+        <material name="table_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.93 0.93 0.93 1"></material>
+    </asset>
+
+    <equality>
+		<!-- <weld body1="mocap" body2="left_outer_knuckle" solimp="1 1 1" solref="1 1"></weld> -->
+        <joint name="fingers" joint1="right_outer_knuckle_joint" joint2="finger_joint" polycoef="0 1 0 0 0"/>
+        <joint name="fingers2" joint1="left_inner_finger_joint" joint2="finger_joint" polycoef="0 -1 0 0 0"/>
+        <joint name="fingers4" joint1="right_inner_finger_joint" joint2="finger_joint" polycoef="0 -1 0 0 0"/>
+        <weld body1="mocap" body2="link6" solimp="0.9 0.95 0.001" solref="0.02 1"></weld>
+        <!-- <weld body1="mocap" body2="link6" solimp="0.9 0.95 0.001" solref="0.02 1"></weld> -->
+    </equality>
+
+    <actuator>
+        <!-- Physical limits of the actuator. -->        
+        <!-- <velocity ctrllimited="true" ctrlrange="-1 1" kv="20" joint="joint1" name="torq_j1"  />
+        <velocity ctrllimited="true" ctrlrange="-1 1" kv="20" joint="joint2" name="torq_j2" />
+        <velocity ctrllimited="true" ctrlrange="-1 1" kv="20" joint="joint3" name="torq_j3" />
+        <velocity ctrllimited="true" ctrlrange="-1 1" kv="20" joint="joint5" name="torq_j5" /> -->
+        <motor ctrllimited="true" ctrlrange="-1 1" joint="finger_joint" name="finger_joint" gear="1"/>
+        <position ctrllimited="true" ctrlrange="-1 1" kp="10" joint="base_link_joint" name="base_link_joint" /> 
+		<!-- <position ctrllimited="true" ctrlrange="-1 0" joint="finger_joint" kp="30" name="finger_joint" user="1"></position>
+		<position ctrllimited="true" ctrlrange="0 1" joint="left_inner_finger_joint" kp="30" name="left_inner_finger_joint" user="1"></position>
+		<position ctrllimited="true" ctrlrange="-1 0" joint="right_outer_knuckle_joint" kp="30" name="right_outer_knuckle_joint" user="1"></position>
+		<position ctrllimited="true" ctrlrange="0 1" joint="right_inner_finger_joint" kp="30" name="right_inner_finger_joint" user="1"></position> -->
+    </actuator>
+
+    <worldbody>
+        <body mocap="true" name="mocap" pos="0 0 0">
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.7" size="0.005 0.005 0.005" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="1 0.005 0.005" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="0.005 1 0.001" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="0.005 0.005 1" type="box"></geom>
+	    </body>
+
+		<body name="floor0" pos="0 0.66 -0.44">
+			<site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+
+        <!-- <body name="object0" pos="0 0 1.30"> -->
+        <!-- <body name="object0" pos="0.4 0.0 0.06">
+			<joint name="object0:joint" type="free" damping="0.01"></joint>
+			<geom size="0.025 0.025 0.025" type="box" condim="3" name="object0" material="block_mat" mass="2"></geom>
+			<site name="object0" pos="0 0 0" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+		</body> -->
+       
+        <body pos="0.35 0 -0.2" name="table0">
+			<geom size="1.7 1.7 0.2" type="box" mass="2000" material="table_mat"></geom>
+		</body>
+
+        <!-- <body pos="1.05 0 0.15" name="tray">
+			<joint name="tray:joint" type="free" damping="0.01"></joint>
+			<geom size="0.05 0.05 0.015" type="box" condim="3" mass="2" material="table_mat"></geom>
+			<site name="tray" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body> -->
+        
+        <!-- <body pos="1.05 0 0.08" name="tray">
+			<joint name="tray:joint" type="free" ></joint>
+            <geom pos="-0.012 0 -0." size="0.005 0.1 0.015" type="box" material="table_mat"></geom>
+            <geom pos="0.012 0 0." size="0.005 0.1 0.015" type="box" material="table_mat"></geom>
+            <geom pos="0.0 -0.1 0.02" size="0.01 0.005 0.01" type="box" material="table_mat"></geom>
+            <geom pos="0.0 0.1 0.02" size="0.01 0.005 0.01" type="box" material="table_mat"></geom>
+            <site name="tray" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+            <geom pos="0.0 0 -0.03" size="0.02 0.02 0.03" type="box" material="table_mat"></geom>  
+        </body> -->
+        
+        <body name="ballbase" pos="0.8 0.1 0.01">
+			<geom size="0.02 0.02 0.01" rgba="1 0 0 1" type="box" condim="3" name="ballbase"></geom>
+			<site name="ballbase" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+
+        <body name="ball" pos="0.8 0.1 0.06">
+			<joint name="ball:joint" type="free"></joint>
+			<!-- <geom size="0.015 0.015 0.03" rgba="1 0 0 1" type="box" condim="3" name="ball" material="block_mat" mass="2"></geom> -->
+			<geom size="0.02 0.02 0.02" rgba="1 0.5 0 1" type="sphere" condim="3" name="ball" mass="0.0002"></geom>
+			<site name="ball" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+
+        <body name="target" pos="0.8 0.5 0.02">
+			<joint name="target:joint" type="free"></joint>
+			<!-- <geom size="0.015 0.015 0.03" rgba="1 0 0 1" type="box" condim="3" name="ball" material="block_mat" mass="2"></geom> -->
+			<geom size="0.02 0.02 0.02" rgba="1 0 0 1" type="box" condim="3" name="target"></geom>
+			<site name="target" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+
+        <body name="link" pos="0 0 0">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_0_0" />
+            <body name="link1" pos="0 0 0.1555">
+                <inertial pos="7e-05 0.044281 0.143327" quat="0.43643 0.523178 -0.561691 0.469379" mass="7.446" diaginertia="0.0395468 0.0389972 0.022456" />
+                <joint name="joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_0" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_2" />
+                <body name="link2" pos="0 0 0" quat="0.499898 -0.500102 -0.5 -0.5">
+                    <inertial pos="-1.6e-05 0.189372 0.418558" quat="0.765408 -0.00377271 0.00338956 0.643525" mass="10.569" diaginertia="0.820084 0.819998 0.0309188" />
+                    <joint name="joint2" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_0" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_1" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_2" />
+                    <body name="link3" pos="0.409 0 0" quat="0.707035 0 0 0.707179">
+                        <inertial pos="6e-06 0.07917 0.781807" quat="0.785861 0.485841 0.200877 -0.32562" mass="3.614" diaginertia="0.012003 0.011997 0.007" />
+                        <joint name="joint3" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_3_0" />
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_3_1" />
+                        <body name="link4" pos="0 -0.367 0" quat="0.707035 0.707179 0 0">
+                            <inertial pos="-2.1e-05 0.12337 1.148" quat="0.696384 -0.109451 0.110147 0.70067" mass="3.785" diaginertia="0.177117 0.177 0.00588312" />
+                            <joint name="joint4" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_4_0" />
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_4_1" />
+                            <body name="link5" pos="0 0 0" quat="0.707035 -0.707179 0 0">
+                                <inertial pos="-1.7e-05 0.06662 1.33103" quat="0.289458 0.294837 -0.651253 0.636517" mass="2.598" diaginertia="0.00700625 0.00699523 0.00399852" />
+                                <joint name="joint5" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_5_0" />
+                                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_5_1" />
+                                <body name="link6" pos="0 -0.124 0" quat="0.707035 0.707179 0 0">
+                                    <inertial pos="-0.000174 0.034708 1.40022" quat="0.3881 -0.303109 0.170502 0.853482" mass="1.128" diaginertia="0.00101032 0.000997245 0.000992434" />
+                                    <joint name="joint6" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_6_0" />
+                                    <body name="mocap_body" pos="0.0 0.0 0.0">
+									    <site name="grip" pos="0.0 0 0" rgba="0 0 0 0" size="0.02 0.02 0.02"></site>
+                                    </body>
+                                    <body name="base_link" pos="0 0 0">
+                                        <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.7" diaginertia="0.001002 0.000999 0.000999" />
+                                        <joint name="base_link_joint" pos="0 0 0" axis="0 0 -1" limited="true" range="-20.01 20.01" stiffness="0" />
+                                        <geom type="mesh" rgba="0.8 0.8 0.8 1" group="0" mesh="base_link" />
+                                        <geom type="mesh" rgba="0.8 0.8 0.8 1" group="1" mesh="base_link_1" />
+                                        <body pos="-0.03 0 0.25" name="tray">
+                                            <!-- <geom pos="-0. 0 -0.015" size="0.015 0.1 0.005" type="box" rgba="0 0 0 1" material="table_mat"></geom>
+                                            <geom pos="0. 0 0.015" size="0.015 0.1 0.005" type="box" rgba="0 0 0 1" material="table_mat"></geom>
+                                            <geom pos="-0.02 -0.095 0.0" size="0.01 0.005 0.01" type="box" rgba="0 0 0 1" material="table_mat"></geom>
+                                            <geom pos="-0.02 0.095 0.0" size="0.01 0.005 0.01" type="box" rgba="0 0 0 1" material="table_mat"></geom>
+                                            <site name="tray" pos="0 0 0" size="0.001 0.001 0.001" rgba="0 0 0 1" type="sphere"></site> -->
+                                            <geom pos="0.11 0 -0." size="0.1 0.02 0.02" type="box" rgba="0 0 0 1" material="table_mat"></geom>  
+                                            <geom pos="0.2 0. 0.04" size="0.01 0.02 0.02" type="box" rgba="0 0 0 1" material="table_mat"></geom>  
+                                        </body>
+                                        <body name="left_outer_knuckle" pos="0 -0.024112 0.136813">
+                                            <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                            <joint name="finger_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-25 0" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="0" mesh="outer_knuckle" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="1" mesh="outer_knuckle_1" />
+                                            <body name="left_inner_finger" pos="0 -0.047335 0.064495">
+                                                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                                <joint name="left_inner_finger_joint" pos="0 0 0" axis="1 0 0" limited="true" range="0 25" />
+                                                <geom type="mesh" rgba="0.8 0.8 0.8 1" friction="1 0.05 0.01" group="0" mesh="inner_finger" />
+                                                <geom type="mesh" rgba="0.8 0.8 0.8 1" friction="1 0.05 0.01" group="1" mesh="inner_finger_1" />
+                                            </body>
+                                        </body>
+                                        <!-- <body name="left_inner_knuckle" pos="0 -0.01272 0.1595">
+                                            <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                            <joint name="left_inner_knuckle_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-60 60" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="0" mesh="inner_knuckle" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="1" mesh="inner_knuckle_1" />
+                                        </body> -->
+                                        <body name="right_outer_knuckle" pos="0 0.024112 0.136813" quat="0 0 0 1">
+                                            <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                            <joint name="right_outer_knuckle_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-25 0" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="0" mesh="outer_knuckle" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="1" mesh="outer_knuckle_1" />
+                                            <body name="right_inner_finger" pos="0 -0.047335 0.064495">
+                                                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                                <joint name="right_inner_finger_joint" pos="0 0 0" axis="1 0 0" limited="true" range="0 25" />
+                                                <geom type="mesh" rgba="0.8 0.8 0.8 1" friction="1 0.05 0.01" group="0" mesh="inner_finger" />
+                                                <geom type="mesh" rgba="0.8 0.8 0.8 1" friction="1 0.05 0.01" group="1" mesh="inner_finger_1" />
+                                            </body>
+                                        </body>
+                                        <!-- <body name="right_inner_knuckle" pos="0 0.01272 0.1595" quat="0 0 0 -1">
+                                            <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                                            <joint name="right_inner_knuckle_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-60 60" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="0" mesh="inner_knuckle" />
+                                            <geom type="mesh" rgba="0.8 0.8 0.8 1" group="1" mesh="inner_knuckle_1" />
+                                        </body> -->
+                                        
+                                    </body>   
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+        
+		<light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+</mujoco>

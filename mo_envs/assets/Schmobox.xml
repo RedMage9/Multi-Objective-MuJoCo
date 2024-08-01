@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="Schmobox">
+    <compiler angle="radian" meshdir="../stl/"  texturedir="../textures/" />
+    <option timestep="0.002" impratio="1"/>
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.44 0.85 0.56" rgb2="0.46 0.87 0.58" width="32" height="32"></texture>
+        <texture name="texture_block" file="block.png" gridsize="3 4" gridlayout=".U..LFRB.D.."></texture>
+        <mesh name="A0509_0_0" file="A0509_0_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_0" file="A0509_1_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_1" file="A0509_1_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_1_2" file="A0509_1_2.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_0" file="A0509_2_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_1" file="A0509_2_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_2_2" file="A0509_2_2.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_3_0" file="A0509_3_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_3_1" file="A0509_3_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_4_0" file="A0509_4_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_4_1" file="A0509_4_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_5_0" file="A0509_5_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_5_1" file="A0509_5_1.stl" scale="0.001 0.001 0.001" />
+        <mesh name="A0509_6_0" file="A0509_6_0.stl" scale="0.001 0.001 0.001" />
+        <mesh name="base_link" file="sch_base_link.STL" />
+        <mesh name="stecker" file="stecker.STL" />
+        <mesh name="halter1" file="halter1.STL" />
+        <mesh name="halter2" file="halter2.STL" />
+        <mesh name="link1" file="link1.STL" />
+        <mesh name="bracket1" file="bracket1.STL" />
+        <mesh name="scheible1" file="scheible1.STL" />
+        <mesh name="bracket2" file="bracket2.STL" />
+        <mesh name="scheible2" file="scheible2.STL" />
+        <mesh name="link2" file="link2.STL" />
+        <mesh name="bracket3" file="bracket3.STL" />
+        <mesh name="sheible3" file="sheible3.STL" />
+        <mesh name="bracket4" file="bracket4.STL" />
+        <mesh name="huelse" file="huelse.STL" />
+        <mesh name="typenschild" file="typenschild.STL" />
+        <material name="block_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.2 0.2 0.2 1"></material>
+        <material name="table_mat" specular="0" shininess="0.5" reflectance="0" rgba="0.93 0.93 0.93 1"></material>
+    </asset>
+
+    <equality>
+        <weld body1="mocap" body2="mocap_body" solimp="0.9 0.95 0.001" solref="0.02 1"></weld>
+    </equality>
+
+    <actuator>
+		<position ctrllimited="true" ctrlrange="-0.2 0." joint="right_finger" kp="30000" name="right_finger" user="1"></position>
+		<position ctrllimited="true" ctrlrange="-0. 0.2" joint="left_finger" kp="30000" name="left_finger" user="1"></position>
+    </actuator>
+
+    <worldbody>
+        <body mocap="true" name="mocap" pos="0 0 0">
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.7" size="0.005 0.005 0.005" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="1 0.005 0.005" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="0.005 1 0.001" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="0 0.5 0 0.1" size="0.005 0.005 1" type="box"></geom>
+	    </body>
+
+		<body name="floor0" pos="0 0.66 -0.44">
+			<site name="target0" pos="0 0 0.5" size="0.02 0.02 0.02" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+
+        <body name="redbox1" pos="0.5 -0.04 -0.">
+			<joint name="redbox1:joint" type="free" damping="0.01"></joint>
+			<geom size="0.01 0.01 0.01" rgba="1 0 0 1" type="box" condim="3" name="redbox1" material="block_mat" mass="2"></geom>
+			<site name="redbox1" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+        
+        <body name="bluebox1" pos="0.5 -0.02 -0.">
+			<joint name="bluebox1:joint" type="free" damping="0.01"></joint>
+			<geom size="0.01 0.01 0.01" rgba="0 0 1 1" type="box" condim="3" name="bluebox1" material="block_mat" mass="2"></geom>
+			<site name="bluebox1" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+        
+        <body name="redbox2" pos="0.5 0 0">
+			<joint name="redbox2:joint" type="free" damping="0.01"></joint>
+			<geom size="0.01 0.01 0.01" rgba="1 0 0 1" type="box" condim="3" name="redbox2" material="block_mat" mass="2"></geom>
+			<site name="redbox2" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+        
+        <body name="bluebox2" pos="0.5 0.02 -0.">
+			<joint name="bluebox2:joint" type="free" damping="0.01"></joint>
+			<geom size="0.01 0.01 0.01" rgba="0 0 1 1" type="box" condim="3" name="bluebox2" material="block_mat" mass="2"></geom>
+			<site name="bluebox2" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+        
+        <body name="redbox3" pos="0.5 0.04 -0.">
+			<joint name="redbox3:joint" type="free" damping="0.01"></joint>
+			<geom size="0.01 0.01 0.01" rgba="1 0 0 1" type="box" condim="3" name="redbox3" material="block_mat" mass="2"></geom>
+			<site name="redbox3" pos="0 0 0" size="0.005 0.005 0.005" rgba="1 0 0 1" type="sphere"></site>
+		</body>
+       
+        <body pos="0.35 0 -0.2" name="table0">
+			<geom size="0.7 0.7 0.2" type="box" mass="2000" material="table_mat"></geom>
+		</body>
+
+        <body name="link" pos="0 0 0">
+            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_0_0" />
+            <body name="link1" pos="0 0 0.1555">
+                <inertial pos="7e-05 0.044281 0.143327" quat="0.43643 0.523178 -0.561691 0.469379" mass="7.446" diaginertia="0.0395468 0.0389972 0.022456" />
+                <joint name="joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_0" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_1" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_1_2" />
+                <body name="link2" pos="0 0 0" quat="0.499898 -0.500102 -0.5 -0.5">
+                    <inertial pos="-1.6e-05 0.189372 0.418558" quat="0.765408 -0.00377271 0.00338956 0.643525" mass="10.569" diaginertia="0.820084 0.819998 0.0309188" />
+                    <joint name="joint2" pos="0 0 0" axis="0 0 1" limited="true" range="-30 180" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_0" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_1" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_2_2" />
+                    <body name="link3" pos="0.409 0 0" quat="0.707035 0 0 0.707179">
+                        <inertial pos="6e-06 0.07917 0.781807" quat="0.785861 0.485841 0.200877 -0.32562" mass="3.614" diaginertia="0.012003 0.011997 0.007" />
+                        <joint name="joint3" pos="0 0 0" axis="0 0 1" limited="true" range="0 180" />
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_3_0" />
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_3_1" />
+                        <body name="link4" pos="0 -0.367 0" quat="0.707035 0.707179 0 0">
+                            <inertial pos="-2.1e-05 0.12337 1.148" quat="0.696384 -0.109451 0.110147 0.70067" mass="3.785" diaginertia="0.177117 0.177 0.00588312" />
+                            <joint name="joint4" pos="0 0 0" axis="0 0 1" limited="true" range="0 0.01" />
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_4_0" />
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_4_1" />
+                            <body name="link5" pos="0 0 0" quat="0.707035 -0.707179 0 0">
+                                <inertial pos="-1.7e-05 0.06662 1.33103" quat="0.289458 0.294837 -0.651253 0.636517" mass="2.598" diaginertia="0.00700625 0.00699523 0.00399852" />
+                                <joint name="joint5" pos="0 0 0" axis="0 0 1" limited="true" range="0 180" />
+                                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_5_0" />
+                                <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_5_1" />
+                                <body name="link6" pos="0 -0.124 0" quat="0.707035 0.707179 0 0">
+                                    <inertial pos="-0.000174 0.034708 1.40022" quat="0.3881 -0.303109 0.170502 0.853482" mass="1.128" diaginertia="0.00101032 0.000997245 0.000992434" />
+                                    <joint name="joint6" pos="0 0 0" axis="0 0 1" limited="true" range="-180 180" />
+                                    <geom type="mesh" contype="0" conaffinity="0" group="1" mesh="A0509_6_0" />
+                                    <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="base_link" />
+                                    <geom pos="0.0197 0 0.0214" quat="0.707107 -0.707107 0 0" type="mesh" rgba="0.752941 0.752941 0.752941 1" mesh="stecker" />
+                                    <geom pos="0.02 0.0002 0.0576" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="halter1" />
+                                    <geom pos="0.02 -0.0002 0.0696" quat="0.5 0.5 -0.5 -0.5" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="halter2" />
+                                    <geom pos="0 0.0129 0.03915" quat="0.707107 -0.707107 0 0" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="typenschild" />
+                                    <!-- <geom pos="0.014 0 0.10065" size="0.004 0.004 0.004" type="box"></geom> -->
+                                    <body name="sch_link1" pos="0.014 0 0.10065" quat="0.707105 0.707108 0 0">
+                                        <inertial pos="-0.0132122 -0.0152873 0.00341397" quat="-0.045814 0.71184 0.23887 0.658883" mass="4.00367229" diaginertia="6.23237e-07 5.29966e-07 1.56735e-07" />
+                                        <joint name="right_finger" axis="1 0 0" range="-0.05 0.05" armature="100" damping="1000" limited="true" solimplimit="0.99 0.999 0.01" solreflimit="0.01 1" type="slide" frictionloss="0" stiffness="0"/>
+                                        <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link1" />
+                                        <geom pos="-0.001 -0.0196 0.004" quat="0.707107 0 0.707107 0" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="bracket1" />
+                                        <geom pos="-0.001 -0.0196 0.004" quat="0.707107 0 0.707107 0" type="mesh" rgba="0.686275 0.686275 0.686275 1" mesh="scheible1" />
+                                        <geom pos="-0.033 -0.0196 0.004" quat="0 0.707107 0 -0.707107" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="bracket2" />
+                                        <geom pos="-0.033 -0.0196 0.004" quat="0 0.707107 0 -0.707107" type="mesh" rgba="0.686275 0.686275 0.686275 1" mesh="scheible2" />
+						                <geom pos="0.0045 0.04 0.0" size="0.004 0.05 0.01" type="box"/>
+						                <!-- <geom pos="0.0045 0.088 0.0" size="0.004 0.098 0.01" type="box" friction="0.01 0.01 0.01"/> -->
+						                <!-- <geom condim="4" margin="0.001" solimp="0.99 0.99 0.01" solref="0.01 1" pos="-0.0085 0.0285 0.0" size="0.007 0.0385 0.0135" type="box" friction="1 0.05 0.01"/> -->
+                                    </body>
+                                    <body name="sch_link2" pos="-0.014 0 0.10065" quat="-2.59734e-06 -2.59735e-06 -0.707108 -0.707105">
+                                        <inertial pos="-0.0137973 -0.0153861 0.00342739" quat="-0.0331274 0.710383 0.23006 0.664327" mass="4.00375836" diaginertia="6.80771e-07 5.8455e-07 1.60026e-07" />
+                                        <joint name="left_finger" axis="-1 0 0" range="-0.05 0.05" armature="100" damping="1000" limited="true" solimplimit="0.99 0.999 0.01" solreflimit="0.01 1" type="slide" frictionloss="0" stiffness="0"/>
+                                        <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="link2" />
+                                        <geom pos="-0.001 -0.0196 0.004" quat="0 0.707107 0 -0.707107" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="bracket3" />
+                                        <geom pos="-0.001 -0.0196 0.004" quat="0 0.707107 0 -0.707107" type="mesh" rgba="0.686275 0.686275 0.686275 1" mesh="sheible3" />
+                                        <geom pos="-0.033 -0.0196 0.004" quat="0.707107 0 0.707107 0" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="bracket4" />
+                                        <geom pos="-0.033 -0.0196 0.004" quat="0.5 0.5 0.5 -0.5" type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="huelse" /> -->
+                                        <geom pos="0.0045 0.04 0.0" size="0.004 0.05 0.01" type="box"/>
+						                <!-- <geom condim="4" margin="0.001" solimp="0.99 0.99 0.01" solref="0.01 1" pos="-0.0085 0.0285 0.0" size="0.007 0.0385 0.0135" type="box" friction="1 0.05 0.01"/> -->
+                                    </body>
+                                    <body name="mocap_body" pos="0.0 0.0 0.15">
+									    <site name="grip" pos="0.0 0 0" rgba="0 0 0 0" size="0.02 0.02 0.02"></site>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+        
+		<light directional="true" ambient="0.2 0.2 0.2" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" castshadow="false" pos="0 0 4" dir="0 0 -1" name="light0"></light>
+    </worldbody>
+</mujoco>
