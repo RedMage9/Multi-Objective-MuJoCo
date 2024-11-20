@@ -1,7 +1,7 @@
 # Multi-Objective-MuJoCo
 Multi-Objective-MuJoCo
 
-* prerequisite
+** prerequisite
 
 - free-mujoco-py==2.1.6
 - gym==0.15.4
